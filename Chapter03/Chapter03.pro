@@ -3,7 +3,7 @@ QT       -= gui core
 TARGET = Chapter03
 CONFIG += console
 CONFIG -= app_bundle
-CONFIG += C++11
+CONFIG += c++11
 
 TEMPLATE = app
 
