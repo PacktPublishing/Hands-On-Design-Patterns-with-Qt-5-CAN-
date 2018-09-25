@@ -111,27 +111,20 @@ TEST(Chapter03, qt_immutable_classes) {
 }
 
 TEST(Chapter03, using_immutable_object_in_thread) {
-    QMutex mutex;
     QMap<QString,int> source = {{"value1", 1}, {"value2", 2}};
 
-    auto worker = [&mutex, source]() {
-        mutex.lock();
-        // Block this function until the "Point A" is executed.
+    auto worker = [source]() {
+        // @ A Thread in the Thread Pool
+        auto localCopy = source;
+        localCopy["value2"] = 9;
 
-        QThread* currentThread = QThread::currentThread();
-        QThread* mainThread = QCoreApplication::instance()->thread();
-
-        ASSERT_EQ(currentThread == mainThread,        false);
-        ASSERT_EQ(source["value1"]+source["value2"],  3);
-
-        mutex.unlock();
+        ASSERT_EQ(source["value1"]+source["value2"],        3); // Point B
+        ASSERT_EQ(localCopy["value1"]+localCopy["value2"],  10);
     };
 
-    mutex.lock();
+    // @ Main Thread
     QFuture<void> future = QtConcurrent::run(worker);
-    source["value1"] = 3; // Point A
-    mutex.unlock();
-
+    source["value1"] = 3;  // Point A
     future.waitForFinished();
 
     ASSERT_EQ(source["value1"]+source["value2"],  5);

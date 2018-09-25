@@ -13,4 +13,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 include(qpm.pri)
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    record.cpp
+
+HEADERS += \
+    record.h
