@@ -3,16 +3,15 @@
 
 template <typename T>
 struct has_squeeze {
-    typedef char Valid;
-    typedef struct{} Invalid;
 
     template <typename Type>
-    static inline auto test(int) -> typename std::enable_if<std::is_same<decltype(std::declval<Type>().squeeze()), void>::value, Valid>::type;
+    static inline auto test(int) -> typename std::enable_if<std::is_same<decltype(std::declval<Type>().squeeze()), void>::value, std::true_type>::type;
 
     template <typename>
-    static inline auto test(...) -> Invalid;
+    static inline auto test(...) -> std::false_type;
+
     enum {
-        value = std::is_same<decltype(test<T>(0)), Valid>::value
+        value = std::is_same<decltype(test<T>(0)), std::true_type>::value
     };
 };
 

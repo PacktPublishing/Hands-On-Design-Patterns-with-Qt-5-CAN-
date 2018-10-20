@@ -1,4 +1,4 @@
-QT       +=  core
+QT       +=  core widgets
 
 TARGET = Chapter07
 CONFIG   += console
@@ -11,4 +11,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 include(qpm.pri)
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    sender.cpp
+
+HEADERS += \
+    sender.h
