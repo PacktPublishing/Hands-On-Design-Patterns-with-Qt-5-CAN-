@@ -12,7 +12,11 @@ include(qpm.pri)
 
 SOURCES += \
     main.cpp \
-    sender.cpp
+    messagequeue.cpp \
+    logger.cpp \
+    message.cpp
 
 HEADERS += \
-    sender.h
+    messagequeue.h \
+    logger.h \
+    message.h
