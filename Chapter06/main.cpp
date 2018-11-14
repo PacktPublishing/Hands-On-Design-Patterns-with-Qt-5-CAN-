@@ -19,12 +19,12 @@ struct has_squeeze {
     };
 };
 
-TEST(Chapter07, has_squeeze) {
+TEST(Chapter06, has_squeeze) {
     ASSERT_EQ(has_squeeze<std::string>::value,  0);
     ASSERT_EQ(has_squeeze<QString>::value,      1);
 }
 
-TEST(Chapter07, className) {
+TEST(Chapter06, className) {
 
     auto className = [](QObject* object) {
         const QMetaObject* metaObject = object->metaObject();
@@ -37,7 +37,7 @@ TEST(Chapter07, className) {
     delete queue;
 }
 
-TEST(Chapter07, parentClassName) {
+TEST(Chapter06, parentClassName) {
     auto parentClassName = [](QObject* object) {
         const QMetaObject* metaObject = object->metaObject();
         const QMetaObject* parentMetaObject = metaObject->superClass();
@@ -50,7 +50,7 @@ TEST(Chapter07, parentClassName) {
     delete queue;
 }
 
-TEST(Chapter07, checkIsAMethodAvailable) {
+TEST(Chapter06, checkIsAMethodAvailable) {
     auto isMethodAvailable = [](QObject* object, const char* method) {
         const QMetaObject* metaObject = object->metaObject();
         QString signature = QMetaObject::normalizedSignature(method);
@@ -63,7 +63,7 @@ TEST(Chapter07, checkIsAMethodAvailable) {
     delete queue;
 }
 
-TEST(Chapter07, invokeMethod) {
+TEST(Chapter06, invokeMethod) {
     QStringList receivedMessages;
     MessageQueue* queue = new MessageQueue();
 
@@ -83,7 +83,7 @@ TEST(Chapter07, invokeMethod) {
     delete queue;
 }
 
-TEST(Chapter07, connect) {
+TEST(Chapter06, connect) {
     MessageQueue* queue = new MessageQueue();
     Logger* logger = new Logger();
 
@@ -99,7 +99,7 @@ TEST(Chapter07, connect) {
     delete logger;
 }
 
-TEST(Chapter07, setDynamicProperties) {
+TEST(Chapter06, setDynamicProperties) {
     MessageQueue* queue = new MessageQueue();
     QString expectedValue = "Any Value";
     queue->setProperty("non-existed-property", expectedValue);
@@ -114,7 +114,7 @@ void removeItemAtObjectList(QObjectList& list, int index) {
     list.removeAt(index);
 }
 
-TEST(Chapter07, removeItemAtObjectList) {
+TEST(Chapter06, removeItemAtObjectList) {
 
     QObjectList list;
 
@@ -129,7 +129,7 @@ TEST(Chapter07, removeItemAtObjectList) {
     ASSERT_EQ(list.size(), 0);
 }
 
-TEST(Chapter07, listOfSmartPointer) {
+TEST(Chapter06, listOfSmartPointer) {
     QList<QSharedPointer<QObject>> list;
 
     QObject* a = new QObject();
@@ -180,7 +180,7 @@ QVariantMap serialize(const T& t) {
     return ret;
 }
 
-TEST(Chapter07, serialize) {
+TEST(Chapter06, serialize) {
     Message message(1, "regular", "content");
     QString expected = "{\"content\":\"content\",\"id\":1,\"type\":\"regular\"}";
 
@@ -201,7 +201,7 @@ void deserialize(T& t, const QVariantMap& map) {
     }
 }
 
-TEST(Chapter07, deserialize) {
+TEST(Chapter06, deserialize) {
     QString json = "{\"content\":\"content\",\"id\":1,\"type\":\"regular\"}";
     QVariantMap data = parse(json);
     Message message;

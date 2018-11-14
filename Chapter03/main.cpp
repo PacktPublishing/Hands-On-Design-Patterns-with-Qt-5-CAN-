@@ -40,7 +40,7 @@ TEST(Chapter03, defentive_copy) {
         foo.bar++;
     };
 
-    auto isChanged = [&](Foo arg) {
+    auto isChanged = [&](const Foo arg) {
         auto before = arg.bar;
         inc();
         auto after = arg.bar;

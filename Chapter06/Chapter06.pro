@@ -1,6 +1,6 @@
 QT       +=  core widgets
 
-TARGET = Chapter07
+TARGET = Chapter06
 CONFIG   += console
 CONFIG   -= app_bundle
 
