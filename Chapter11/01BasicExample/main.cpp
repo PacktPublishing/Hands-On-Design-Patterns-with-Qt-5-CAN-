@@ -9,7 +9,7 @@
 int QStringListModelAndQListView(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    auto model = new QStringListModel(&app);
+    auto model = new QStringListModel();
     auto nameList = QStringList{"Oliver", "Jack	", "Harry", "Jacob" ,"Charlie", "Thomas", "George", "Oscar", "James", "William"};
     model->setStringList(nameList);
 
@@ -23,7 +23,7 @@ int QStringListModelAndQListView(int argc, char *argv[]) {
 int QStringListModelAndQTableView(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    auto model = new QStringListModel(&app);
+    auto model = new QStringListModel();
     auto nameList = QStringList{"Oliver", "Jack	", "Harry", "Jacob" ,"Charlie", "Thomas", "George", "Oscar", "James", "William"};
     model->setStringList(nameList);
 
@@ -37,7 +37,7 @@ int QStringListModelAndQTableView(int argc, char *argv[]) {
 int QFileSystModelAndQTreeView(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    auto model = new QFileSystemModel(&app);
+    auto model = new QFileSystemModel();
     model->setRootPath(SRCDIR);
 
     auto view = new QTableView();
@@ -50,5 +50,7 @@ int QFileSystModelAndQTreeView(int argc, char *argv[]) {
 
 int main(int argc, char *argv[])
 {
+//    return QStringListModelAndQListView(argc, argv);
+//    return QStringListModelAndQTableView(argc, argv);
     return QFileSystModelAndQTreeView(argc, argv);
 }
