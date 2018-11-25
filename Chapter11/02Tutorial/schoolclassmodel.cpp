@@ -52,15 +52,46 @@ QVariant SchoolClassModel::data(const QModelIndex &index, int role) const
     } else {
         auto parentIndex = parent(index);
         auto& studentList = m_storage[parentIndex.row()].students;
-        return studentList[index.row()].name;
+        auto& student = studentList[index.row()];
+
+        switch (index.column()) {
+        case 0:
+            return student.name;
+        case 1:
+            return student.studentId;
+        case 2:
+            return student.age;
+        }
     }
+
+    return QVariant();
 }
 
-int SchoolClassModel::columnCount(const QModelIndex &parent) const
+bool SchoolClassModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    Q_UNUSED(parent);
-    return 1;
+    if (!index.isValid() || role != Qt::EditRole || index.internalId() == 0) {
+        return false;
+    }
+
+    auto parentIndex = parent(index);
+    auto& studentList = m_storage[parentIndex.row()].students;
+    auto& student = studentList[index.row()];
+    switch (index.column()) {
+    case 0:
+        student.name = value.toString();
+        break;
+    case 1:
+        student.studentId = value.toString();
+        break;
+    case 2:
+        student.age = value.toInt();
+        break;
+    }
+
+    emit dataChanged(index, index, {role});
+    return true;
 }
+
 
 int SchoolClassModel::rowCount(const QModelIndex &parent) const
 {
@@ -76,17 +107,46 @@ int SchoolClassModel::rowCount(const QModelIndex &parent) const
     return 0;
 }
 
+int SchoolClassModel::columnCount(const QModelIndex &parent) const
+{
+    if (!parent.isValid()) {
+        return 1;
+    }
+
+    if (parent.internalId() == 0) {
+        return 3;
+    }
+
+    return 0;
+}
+
 QVariant SchoolClassModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role != Qt::DisplayRole) {
         return QVariant();
     }
 
-    if (orientation == Qt::Horizontal && section == 0 ) {
-        return QObject::tr("Student");
+    if (orientation == Qt::Horizontal) {
+        switch (section) {
+        case 0:
+            return QObject::tr("Student");
+        case 1:
+            return QObject::tr("ID");
+        case 2:
+            return QObject::tr("Age");
+        }
     }
 
     return QVariant();
+}
+
+Qt::ItemFlags SchoolClassModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid() || index.internalId() == 0) {
+        return Qt::NoItemFlags;
+    }
+
+    return Qt::ItemIsEditable | QAbstractItemModel::flags(index);
 }
 
 void SchoolClassModel::setStorage(const QList<SchoolClassInfo> &storage)

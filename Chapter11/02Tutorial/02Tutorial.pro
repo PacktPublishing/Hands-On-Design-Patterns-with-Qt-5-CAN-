@@ -24,14 +24,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    schoolclassmodel.cpp
+    schoolclassmodel.cpp \
+    studentinfodelegate.cpp \
+    schoolclassinfodelegate.cpp
 
 HEADERS += \
-        mainwindow.h \
     schoolclassmodel.h \
     studentinfo.h \
-    schoolclassinfo.h
+    schoolclassinfo.h \
+    studentinfodelegate.h \
+    schoolclassinfodelegate.h
 
 FORMS += \
         mainwindow.ui
