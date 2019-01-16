@@ -7,7 +7,7 @@ std::list<int> getFactors(int number) {
     for (;number % 2 == 0; number /= 2)
         factors.push_back(2);
 
-    if (number % 3 == 0)
+    for (;number % 3 == 0; number /= 3)
         factors.push_back(3);
 
     return factors;
