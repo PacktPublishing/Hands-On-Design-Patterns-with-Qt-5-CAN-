@@ -12,3 +12,7 @@ TEST(PrimeFactors, oneShouldReturnEmpty)
     ASSERT_THAT(getFactors(1), std::list<int>{} );
 }
 
+TEST(PrimeFactors, twoShouldReturnTwo)
+{
+    ASSERT_THAT(getFactors(2), std::list<int>{2});
+}
