@@ -26,3 +26,8 @@ TEST(PrimeFactors, SixShouldReturnTwoThree)
 {
     ASSERT_THAT(getFactors(6), (std::list<int>{2,3}));
 }
+
+TEST(PrimeFactors, NineShouldReturnThreeThree)
+{
+    ASSERT_THAT(getFactors(9), (std::list<int>{3,3}));
+}
