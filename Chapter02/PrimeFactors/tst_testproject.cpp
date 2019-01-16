@@ -3,6 +3,7 @@
 #include <gmock/gmock-matchers.h>
 
 #include "primefactors.h"
+#include <list>
 
 using namespace testing;
 
