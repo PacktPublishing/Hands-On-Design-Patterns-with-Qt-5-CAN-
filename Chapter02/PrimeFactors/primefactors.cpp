@@ -4,11 +4,9 @@
 std::list<int> getFactors(int number) {
     std::list<int> factors = {};
 
-    for (;number % 2 == 0; number /= 2)
-        factors.push_back(2);
-
-    for (;number % 3 == 0; number /= 3)
-        factors.push_back(3);
+    for (int factor=2; factor<=number; factor++)
+        for (;number % factor == 0; number /= factor)
+            factors.push_back(factor);
 
     return factors;
 }
