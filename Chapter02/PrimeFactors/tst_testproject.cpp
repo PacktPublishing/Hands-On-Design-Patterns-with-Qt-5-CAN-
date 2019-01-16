@@ -21,3 +21,8 @@ TEST(PrimeFactors, fourShouldReturnTwoTwo)
 {
     ASSERT_THAT(getFactors(4), (std::list<int>{2,2}));
 }
+
+TEST(PrimeFactors, SixShouldReturnTwoThree)
+{
+    ASSERT_THAT(getFactors(6), (std::list<int>{2,3}));
+}
